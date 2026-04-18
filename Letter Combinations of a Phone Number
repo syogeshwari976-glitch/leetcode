@@ -1,0 +1,21 @@
+public class Solution {
+    public List<String> letterCombinations(String digits) {
+        LinkedList<String> result = new LinkedList<>();
+        if (digits.isEmpty()) return result;
+        String[] mapping = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        
+        result.add("");
+        for (int i = 0; i < digits.length(); i++) {
+            int digit = Character.getNumericValue(digits.charAt(i));
+            
+                        while (result.peek().length() == i) {
+                String currentCombination = result.remove();
+                for (char letter : mapping[digit].toCharArray()) {
+                    result.add(currentCombination + letter);
+                }
+            }
+        }
+        
+        return result;
+    }
+}

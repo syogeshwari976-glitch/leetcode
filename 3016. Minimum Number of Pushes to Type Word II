@@ -1,0 +1,32 @@
+import java.util.Arrays;
+
+class Solution {
+    public int minimumPushes(String word) {
+        // Count frequencies of each character
+        int[] frequencies = new int[26];
+        for (int i = 0; i < word.length(); i++) {
+            frequencies[word.charAt(i) - 'a']++;
+        }
+        
+        // Sort frequencies in ascending order
+        Arrays.sort(frequencies);
+        
+        int totalPushes = 0;
+        int distinctLettersCount = 0;
+        
+        // Iterate backwards from the most frequent characters
+        for (int i = 25; i >= 0; i--) {
+            if (frequencies[i] == 0) {
+                break; // No more characters to process
+            }
+            
+            // Calculate how many presses this character takes based on its rank
+            int multiplier = (distinctLettersCount / 8) + 1;
+            totalPushes += frequencies[i] * multiplier;
+            
+            distinctLettersCount++;
+        }
+        
+        return totalPushes;
+    }
+}

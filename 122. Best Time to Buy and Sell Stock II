@@ -1,0 +1,17 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        int hold = -prices[0]; 
+        int unhold = 0;         
+
+        for (int i = 1; i < prices.length; i++){
+            int prevHold = hold;
+            int prevUnhold = unhold;
+            hold = Math.max(prevHold, prevUnhold - prices[i]);
+            unhold = Math.max(prevUnhold, prevHold + prices[i]);
+        }
+        return unhold;   
+    }
+}
